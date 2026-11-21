@@ -208,7 +208,7 @@ rowstat <- function(z) {
  ci <- confint(m,df=degf(z))*100
  c(nrow(z$variables),sprintf("%.1f (%.1f to %.1f)",100*coef(m),ci[,1],ci[,2]))
 }
-sets <- list("Wave 6 main"=main,"Age-sex post-stratified"=subset(sp,age45&strict&pair),"Broader hypertension definition"=subset(ds,age45&broad&pair),"Exclude marked proxy responses"=subset(main,is.na(dproxy)|dproxy!=1),"Broader geographic clustering"=subset(svydesign(ids=~county,weights=~w,data=county$variables),age45&strict&pair),"2021 interviews"=subset(main,year==2021),"2022 interviews"=subset(main,year==2022),"2023 interviews"=subset(main,year==2023),"2018 earlier-wave replication"=t18)
+sets <- list("Wave 6 main"=main,"Age-sex post-stratified"=subset(sp,age45&strict&pair),"Broader hypertension definition"=subset(ds,age45&broad&pair),"Exclude marked proxy responses"=subset(main,is.na(dproxy)|dproxy!=1),"Broader geographic clustering"=subset(svydesign(ids=~county,weights=~w,data=county$variables),age45&strict&pair),"2021 interviews"=subset(main,year==2021),"2022 interviews"=subset(main,year==2022),"2023 interviews"=subset(main,year==2023),"2018 earlier-wave comparison"=t18)
 st <- cbind(names(sets),t(vapply(sets,rowstat,character(6))))
 colnames(st) <- c("Analysis","n","Both","BP only","Diabetes only","Neither","Difference")
 put(tablemd(st),"sensitivity.md")
